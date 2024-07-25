@@ -1,0 +1,16 @@
+.wrapperMessageItem {
+    border-radius: rem(8px);
+    word-wrap: break-word;
+  }
+  
+.userTextMessage {
+    white-space: pre-wrap;
+  }
+
+.codeBlockItem {
+    margin: 0.5em 0;
+    padding: 1em;
+    border-radius: rem(4px);
+    font-family: 'Courier New', Courier, monospace;
+  }
+  

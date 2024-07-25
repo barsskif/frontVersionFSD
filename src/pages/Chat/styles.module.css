@@ -1,0 +1,17 @@
+.wrapperChatRoot {
+    padding: rem(10px);
+}
+
+.wrapperMessageBlock {
+    display: flex;
+    padding: rem(40px);
+    flex-direction: column;
+    gap: rem(20px);
+    height: 88.5vh;
+    overflow-y: auto;
+}
+
+.wrapperInputBlock {
+    display: flex;
+    justify-content: center;
+}

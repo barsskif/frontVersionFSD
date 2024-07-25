@@ -1,0 +1,54 @@
+.codeBlock {
+    position: relative;
+    margin-bottom: 1rem;
+
+  }
+  
+.languageLabel {
+    position: absolute;
+    top: -25px;
+    left: -10px;
+    width: fit-content;
+    background-color: #0b0808;
+    padding: 2px 5px;
+    font-size: 0.8em;
+    font-style: italic;
+    border-radius: 3px 0 3px 0;
+  }
+  
+.codeContent {
+    padding-top: 0;
+  }
+
+ .paragraph {
+    margin: 0.5em 0;
+    line-height: 1.5;
+  }
+  
+  .heading {
+    margin: 0.5em 0;
+  }
+  
+  .list {
+    padding-left: 1.5em;
+    margin: 0.5em 0;
+  }
+  
+  .listItem {
+    margin: 0.25em 0;
+  }
+  
+  .blockquote {
+    border-left: 4px solid #ccc;
+    padding-left: 1em;
+    margin: 0.5em 0;
+    font-style: italic;
+  }
+  
+
+  .inlineCode {
+    background-color: #242020;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+  } 

@@ -1,0 +1,7 @@
+.rootWrapper {
+    display: flex;
+}
+
+.childrenContainer {
+    flex: 1;
+}
