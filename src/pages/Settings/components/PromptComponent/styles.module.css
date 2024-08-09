@@ -1,0 +1,7 @@
+.promtRootWrapper {
+    padding: rem(10px);
+    background:#424242;
+    border-radius: var(--skeleton-radius, 0.5rem);
+    overflow-y: auto;
+    height: rem(95vh);
+}

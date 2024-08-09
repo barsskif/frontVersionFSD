@@ -1,13 +1,11 @@
 import { Box, Radio, rem, Skeleton } from '@mantine/core';
 import { useEffect, useState } from 'react';
 
-import styles from './StyleSelectVersionGpt.module.css';
-import { getVersionGpt } from '@src/features/Settings/api/getVersionGpt';
-import { useAppDispatch, useAppSelector } from '@src/shared/hooks/useRedux';
-import {
-  getSelectVerGptAction,
-  postSelectVerGptAction,
-} from '@src/features/Settings/model/servsionGptState/actions/versionGptAction';
+import { getVersionGpt } from '@src/features/Setting/api/getVersionGpt';
+import { getGptVersionSelect } from '@src/features/Setting/api/getGptVersionSelect';
+
+import classes from './styles.module.css';
+import { postSetVersionGpt } from '@src/features/Setting/api/postGptVersionSelect';
 
 type gptVersionsType = {
   [key: string]: string;
@@ -16,41 +14,39 @@ type gptVersionsType = {
 const PRIMARY_COL_HEIGHT = rem('95vh');
 
 export const SelectVersionGpt = () => {
-  const dispatch = useAppDispatch();
-  const { selectVersionGpt } = useAppSelector(
-    (state) => state.selectVersionGpt,
-  );
+  const [gptVersion, setGptVersion] = useState<string | null>(null);
   const [gptVersions, setGptVersions] = useState<null | gptVersionsType>(null);
 
   const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - var(--mantine-spacing-md) / 2)`;
 
   const handleRadioChange = (newValue: string) => {
-    // setActialVersionGpt(newValue);
-    dispatch(postSelectVerGptAction(newValue));
+    setGptVersion(newValue);
+    postSetVersionGpt(newValue);
   };
 
   useEffect(() => {
-    const fetchGptVersions = async () => {
+    const fetchAndSetGptSettingsAndGptVersion = async () => {
       try {
-        const res = await getVersionGpt();
+        const { settings } = await getGptVersionSelect();
+        setGptVersions(settings);
 
-        setGptVersions(res.settings);
+        const res = await getVersionGpt();
+        setGptVersion(res.select_version);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchGptVersions();
-    dispatch(getSelectVerGptAction());
+    fetchAndSetGptSettingsAndGptVersion();
   }, []);
 
   if (!gptVersions)
     return <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate />;
 
   return (
-    <Box className={styles.switchRootWrapper}>
+    <Box className={classes.switchRootWrapper}>
       <Radio.Group
-        value={selectVersionGpt}
+        value={gptVersion}
         onChange={handleRadioChange}
         name="gpt modal"
         label={
@@ -73,7 +69,7 @@ export const SelectVersionGpt = () => {
             label={value}
             key={key}
             classNames={{
-              root: styles.switchItem,
+              root: classes.switchItem,
             }}
           />
         ))}

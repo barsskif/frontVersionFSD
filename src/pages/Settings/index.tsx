@@ -1,10 +1,9 @@
-import { Box, Container, Grid, SimpleGrid } from '@mantine/core';
-import { Prompt } from '@src/pages/Settings/components/Prompt';
+import { Container, Grid, SimpleGrid } from '@mantine/core';
+import { PromptComponent } from '@src/pages/Settings/components/PromptComponent';
 import { SelectVersionGpt } from '@src/pages/Settings/components/SelectVersionGpt';
+import { Stub } from '@src/shared/components/Stub';
 
-import styles from './styles.module.css'
-
-export const Settings = () => {
+export const Setiings = () => {
   return (
     <Container
       my="md"
@@ -13,53 +12,13 @@ export const Settings = () => {
       }}
     >
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-        <Prompt />
+        <PromptComponent />
         <Grid gutter="md">
           <Grid.Col>
-            <Box className={styles.stubRootWrapper}>
-              <p
-                style={{
-                  marginTop: '0px',
-                  textTransform: 'uppercase',
-                }}
-              >
-                sdklvnkjsdv
-              </p>
-              <div
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  height: '70%',
-                }}
-              >
-                <p>NO DATA</p>
-              </div>
-            </Box>
+            <Stub tuitle="no data" discription="no data" />
           </Grid.Col>
           <Grid.Col span={6}>
-            <Box className={styles.stubRootWrapper}>
-              <p
-                style={{
-                  marginTop: '0px',
-                  textTransform: 'uppercase',
-                }}
-              >
-                sdklvnkjsdv
-              </p>
-              <div
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  height: '70%',
-                }}
-              >
-                <p>NO DATA</p>
-              </div>
-            </Box>
+            <Stub tuitle="no data" discription="no data" />
           </Grid.Col>
           <Grid.Col span={6}>
             <SelectVersionGpt />

@@ -55,9 +55,9 @@ export const NavbarPanel = () => {
   };
 
   const handleClearChat = async () => {
-    const { data } = await clearAllChat();
+    const status = await clearAllChat();
 
-    if (data.delete === true) {
+    if (status === 'succes') {
       location.reload();
     }
   };
