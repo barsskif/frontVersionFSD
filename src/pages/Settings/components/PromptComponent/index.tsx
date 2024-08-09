@@ -1,9 +1,10 @@
 import { Box } from '@mantine/core';
-import { getPrompt } from '@src/features/Setting/api/getPrompt';
-import { CustomMarkdown } from '@src/pages/Chat/components/CustomMarkdown';
+import { getPrompt } from '@src/features/Settings/api/getPrompt';
+
 import { useEffect, useState } from 'react';
 
 import classes from './styles.module.css';
+import { CustomMarkdown } from '@src/shared/components/CustomMarkdown';
 
 export const PromptComponent = () => {
   const [prompt, setPrompt] = useState('');

@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type typeInitialState = {
-  selectVersionGpt: string | null;
+  selectVersionGptCurent: string | null;
+  allVersionGpt: string[] | [];
   isLoading: boolean;
   isError: boolean;
 };
 
 const initialState: typeInitialState = {
-    selectVersionGpt: null,
-    isLoading: false,
-    isError: false,
+  selectVersionGptCurent: null,
+  allVersionGpt: [],
+  isLoading: false,
+  isError: false,
 };
 
 export const selectVersionGptSlice = createSlice({
@@ -17,14 +19,17 @@ export const selectVersionGptSlice = createSlice({
   initialState,
   reducers: {
     setSelectVersionGptSuccess: (state, action: PayloadAction<string>) => {
-      state.selectVersionGpt = action.payload;
+      state.selectVersionGptCurent = action.payload;
     },
     setSelectVersionGptError: (state, action) => {
         state.isError = action.payload;
+    },
+    getAllVersionGpt: (state, action) => {
+      state.allVersionGpt = action.payload;
     },
   },
 });
 
 export default selectVersionGptSlice.reducer;
 
-export const { setSelectVersionGptSuccess, setSelectVersionGptError} = selectVersionGptSlice.actions;
+export const { setSelectVersionGptSuccess, setSelectVersionGptError, getAllVersionGpt } = selectVersionGptSlice.actions;

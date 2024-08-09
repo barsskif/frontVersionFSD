@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Box, Text } from '@mantine/core';
+import { useAppDispatch, useAppSelector } from '@src/shared/hooks/useRedux';
 
 import { fetchMessage } from '@src/features/Chat/api/fetchMessage';
-import { getVersionAssistent } from '@src/features/Chat/api/getVersionAssistent';
 import { fetchPostSSE } from '@src/features/Chat/api/fetchPostSSE';
+import { getSelectCurrentVerGptAction } from '@src/features/Settings/model/servsionGptState/actions/versionGptAction';
 
 import { MessageItem } from '@src/pages/Chat/components/MessageItem';
 import { messageType } from '@src/shared/@types/mesages';
@@ -13,15 +14,17 @@ import { InputQuestions } from '@src/pages/Chat/components/InputQuestions';
 import styles from './styles.module.css';
 
 export const Chat = () => {
+  const dispatch = useAppDispatch();
   const [mesages, setMesages] = useState<[] | messageType[]>([]);
-  console.log('🚀 ~ Chat ~ mesages:', mesages);
   const [inputQuestion, setInputQuestion] = useState<string>('');
-  const [assistentVersion, setAssistentVersion] = useState<string>('');
+
+  const { selectVersionGptCurent } = useAppSelector(
+    ({ selectVersionGpt }) => selectVersionGpt,
+  );
 
   useEffect(() => {
     const fetch = async () => {
       const data = await fetchMessage();
-      const assistentVersion = await getVersionAssistent();
 
       if (data.message.length === 0) {
         setMesages([
@@ -34,12 +37,12 @@ export const Chat = () => {
         ]);
       }
 
-      setAssistentVersion(assistentVersion.select_version);
       setMesages((prev) => [...prev, ...data.message]);
     };
 
     fetch();
-  }, []);
+    dispatch(getSelectCurrentVerGptAction());
+  }, [dispatch]);
 
   const handleSubmit = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -63,7 +66,8 @@ export const Chat = () => {
   return (
     <Box className={styles.wrapperChatRoot}>
       <Text component="h1" className="">
-        assistent version: <Text component="span">[{assistentVersion}]</Text>
+        assistent version:{' '}
+        <Text component="span">[{selectVersionGptCurent}]</Text>
       </Text>
       <Box className={styles.wrapperMessageBlock}>
         {mesages?.map((item) => (
