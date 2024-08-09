@@ -1,7 +1,7 @@
 import { Box, Text } from '@mantine/core';
 import { clsx } from 'clsx';
 
-import { CustomMarkdown } from '@src/pages/Chat/components/CustomMarkdown';
+import { CustomMarkdown } from '@src/shared/components/CustomMarkdown';
 import { CardMessageWrapper } from '@src/shared/components/CardMessageWrapper';
 
 import styles from './styles.module.css';

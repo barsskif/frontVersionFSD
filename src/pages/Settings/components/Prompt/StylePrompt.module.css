@@ -1,0 +1,49 @@
+.promtRootWrapper {
+    padding: rem(10px);
+    background:#424242;
+    border-radius: var(--skeleton-radius, 0.5rem);
+    overflow-y: auto;
+    height: rem(95vh);
+}
+
+.titleWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .titleItem{
+        display: flex;
+        align-items: center;
+        gap: rem(10px);
+
+        .helpImg {
+            cursor: pointer;
+        }
+    }
+   
+    .editIMG {
+        cursor: pointer
+    }
+}
+
+.inputPrompt{
+    height: rem(80vh) !important;
+    overflow-y: auto;
+    background-color: var(--mantine-color-dark-4);
+    color: #fff;
+    margin-top: 20px;
+
+
+    &:disabled {
+        background-color: var(--mantine-color-dark-4);
+        color: #fff;
+        opacity: 0.9;
+      }
+}
+
+.buttonWrapper{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
