@@ -41,6 +41,3 @@ export const getAllVersionGptAction = () => async (dispatch: AppDispatch) => {
     dispatch(setSelectVersionGptError(error))
   }
 };
-
-
-
