@@ -13,4 +13,8 @@
     border-radius: rem(4px);
     font-family: 'Courier New', Courier, monospace;
   }
+
+.wrapperMessageRoot {
+    max-width: 87vw;
+  }
   

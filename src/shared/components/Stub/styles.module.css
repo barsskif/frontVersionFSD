@@ -1,0 +1,7 @@
+.stubRootWrapper {
+    padding: 10px;
+    background:#424242;
+    border-radius: var(--skeleton-radius, 0.5rem);
+    overflow-y: auto;
+    height: calc(rem(95vh) / 2 - var(--mantine-spacing-md) / 2);
+}
