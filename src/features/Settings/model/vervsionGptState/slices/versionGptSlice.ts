@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type typeInitialState = {
   isLoading: boolean;
@@ -14,6 +14,9 @@ export const selectVersionGptSlice = createSlice({
   name: 'selectVersionGptSlice',
   initialState,
   reducers: {
+    setSelectVersionGptLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
     setSelectVersionGptError: (state, action) => {
         state.isError = action.payload;
     },

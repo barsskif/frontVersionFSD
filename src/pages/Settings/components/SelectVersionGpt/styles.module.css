@@ -4,9 +4,17 @@
     border-radius: var(--skeleton-radius, 0.5rem);
     overflow-y: auto;
     height: calc(rem(95vh) / 2 - var(--mantine-spacing-md) / 2);
+    position: relative;
 }
 
 .switchItem {
     margin-bottom: 10px;
     cursor: pointer;
  }
+
+.loading {
+    position: absolute !important;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}

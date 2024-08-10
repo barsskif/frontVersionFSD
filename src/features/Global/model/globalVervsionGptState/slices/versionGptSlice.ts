@@ -18,6 +18,9 @@ export const globalVersionGptSlice = createSlice({
   name: 'globalVersionGptSlice',
   initialState,
   reducers: {
+    setSelectVersionGptLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
     setSelectVersionGptSuccess: (state, action: PayloadAction<string>) => {
       state.selectVersionGptCurent = action.payload;
     },
@@ -32,4 +35,9 @@ export const globalVersionGptSlice = createSlice({
 
 export default globalVersionGptSlice.reducer;
 
-export const { setSelectVersionGptSuccess, setSelectVersionGptError, getAllVersionGpt } = globalVersionGptSlice.actions;
+export const { 
+    setSelectVersionGptSuccess, 
+    setSelectVersionGptError, 
+    getAllVersionGpt, 
+    setSelectVersionGptLoading
+ } = globalVersionGptSlice.actions;
