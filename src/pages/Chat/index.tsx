@@ -32,7 +32,7 @@ export const Chat = () => {
         setMesages([
           {
             id: 0,
-            text: 'Меня зовут Пятница! \n\n Чем я могу помочь?',
+            text: 'Меня зовут Пятница! \n Чем я могу помочь?',
             time: new Date().toISOString(),
             user: 'assistant',
           },
