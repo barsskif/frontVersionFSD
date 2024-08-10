@@ -1,10 +1,12 @@
-import { Code, Text } from '@mantine/core';
+import { memo, useEffect, useRef } from 'react';
+import { Code, rem, Text } from '@mantine/core';
 import ReactMarkdown from 'react-markdown';
 import { clsx } from 'clsx';
 import Prism from 'prismjs';
 
-import 'prism-themes/themes/prism-darcula.css';
+import { CustomHeading } from '@src/shared/components/CustomHeading';
 
+import 'prism-themes/themes/prism-darcula.css';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-typescript';
@@ -18,15 +20,13 @@ import 'prismjs/components/prism-sass';
 import 'prismjs/components/prism-less';
 import 'prismjs/components/prism-json';
 
-import styles from './styles.module.css';
-import { useEffect, useRef } from 'react';
+import classes from './styles.module.css';
 
-type TypeCustomMarkdownProps = {
+type CustomMarkdownProps = {
   message: string;
 };
 
-export const CustomMarkdown = (props: TypeCustomMarkdownProps) => {
-  const { message } = props;
+export const CustomMarkdown = memo(({ message }: CustomMarkdownProps) => {
   const codeRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -42,50 +42,58 @@ export const CustomMarkdown = (props: TypeCustomMarkdownProps) => {
           code({ className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             return match ? (
-              <div className={styles.codeBlock}>
+              <div className={classes.codeBlock}>
                 {match && (
-                  <div className={styles.languageLabel}>{match[1]}</div>
+                  <div className={classes.languageLabel}>{match[1]}</div>
                 )}
 
                 <Code
-                  className={clsx(className, styles.codeContent)}
-                  style={{ fontSize: '1.2em' }}
+                  className={clsx(className, classes.codeContent)}
+                  style={{ fontSize: rem('1.2em') }}
                   {...props}
                 >
                   {String(children).replace(/\n$/, '')}
                 </Code>
               </div>
             ) : (
-              <Code className={styles.inlineCode} {...props}>
+              <Code className={classes.inlineCode} {...props}>
                 {children}
               </Code>
             );
           },
           p: ({ children }) => (
-            <Text component="p" className={styles.paragraph}>
+            <Text component="p" className={classes.paragraph}>
               {children}
             </Text>
           ),
           h1: ({ children }) => (
-            <Text component="h1" size="xl" className={styles.heading}>
-              {children}
-            </Text>
+            <CustomHeading
+              children={children}
+              level="h1"
+              className={classes.heading}
+            />
           ),
           h2: ({ children }) => (
-            <Text component="h2" size="lg" className={styles.heading}>
-              {children}
-            </Text>
+            <CustomHeading
+              children={children}
+              level="h2"
+              className={classes.heading}
+            />
           ),
           h3: ({ children }) => (
-            <Text component="h3" size="md" className={styles.heading}>
-              {children}
-            </Text>
+            <CustomHeading
+              children={children}
+              level="h3"
+              className={classes.heading}
+            />
           ),
-          ul: ({ children }) => <ul className={styles.list}>{children}</ul>,
-          ol: ({ children }) => <ol className={styles.list}>{children}</ol>,
-          li: ({ children }) => <li className={styles.listItem}>{children}</li>,
+          ul: ({ children }) => <ul className={classes.list}>{children}</ul>,
+          ol: ({ children }) => <ol className={classes.list}>{children}</ol>,
+          li: ({ children }) => (
+            <li className={classes.listItem}>{children}</li>
+          ),
           blockquote: ({ children }) => (
-            <blockquote className={styles.blockquote}>{children}</blockquote>
+            <blockquote className={classes.blockquote}>{children}</blockquote>
           ),
         }}
       >
@@ -93,4 +101,4 @@ export const CustomMarkdown = (props: TypeCustomMarkdownProps) => {
       </ReactMarkdown>
     </div>
   );
-};
+});

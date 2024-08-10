@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '@src/shared/hooks/useRedux';
 
 import { fetchMessage } from '@src/features/Chat/api/fetchMessage';
 import { fetchPostSSE } from '@src/features/Chat/api/fetchPostSSE';
-import { getSelectCurrentVerGptAction } from '@src/features/Settings/model/servsionGptState/actions/versionGptAction';
 
 import { MessageItem } from '@src/pages/Chat/components/MessageItem';
 import { messageType } from '@src/shared/@types/mesages';
@@ -19,7 +18,7 @@ export const Chat = () => {
   const [inputQuestion, setInputQuestion] = useState<string>('');
 
   const { selectVersionGptCurent } = useAppSelector(
-    ({ selectVersionGpt }) => selectVersionGpt,
+    ({ globalVersionGptSlice }) => globalVersionGptSlice,
   );
 
   useEffect(() => {
@@ -41,7 +40,6 @@ export const Chat = () => {
     };
 
     fetch();
-    dispatch(getSelectCurrentVerGptAction());
   }, [dispatch]);
 
   const handleSubmit = (

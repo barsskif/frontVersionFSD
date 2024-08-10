@@ -6,8 +6,11 @@ import {
   Paper,
 } from '@mantine/core';
 
-import classes from './CardMessageWrapper.module.css';
+import { getRole } from '@src/shared/utils/getRole';
 import { getCurrentTime } from '@src/shared/utils/getTimeMessage';
+import { AssistantAvatar, UserAvatar } from '@src/shared/enum';
+
+import classes from './CardMessageWrapper.module.css';
 
 export const CardMessageWrapper = ({
   children,
@@ -18,10 +21,8 @@ export const CardMessageWrapper = ({
   sender: string;
   date: string;
 }) => {
-  const urlAvatar =
-    sender === 'user'
-      ? 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png'
-      : 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-4.png';
+  const role = getRole(sender);
+  const urlAvatar = role ? UserAvatar : AssistantAvatar;
 
   return (
     <Paper
@@ -30,8 +31,8 @@ export const CardMessageWrapper = ({
       className={classes.comment}
       styles={() => ({
         root: {
-          background: sender === 'user' ? '#181616a8' : 'inherit',
-          color: sender === 'user' ? '#fefefecc' : 'inherit',
+          background: role ? '#181616a8' : 'inherit',
+          color: role ? '#fefefecc' : 'inherit',
         },
       })}
     >

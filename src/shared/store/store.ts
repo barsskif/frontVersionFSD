@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { selectVersionGptSlice } from '@src/features/Settings/model/servsionGptState/slices/versionGptSlice';
+import { globalVersionGptSlice } from '@src/features/Global/model/globalVervsionGptState/slices/versionGptSlice';
+import { selectVersionGptSlice } from '@src/features/Settings/model/vervsionGptState/slices/versionGptSlice';
 
 
 const rootReducer = combineReducers({
-  selectVersionGpt: selectVersionGptSlice.reducer
+  selectVersionGpt: selectVersionGptSlice.reducer,
+  globalVersionGptSlice: globalVersionGptSlice.reducer
 });
 
 export const setupStore = () => {

@@ -1,0 +1,2 @@
+export const UserAvatar = 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png';
+export const AssistantAvatar ='https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-4.png';

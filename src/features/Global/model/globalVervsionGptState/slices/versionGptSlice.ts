@@ -14,8 +14,8 @@ const initialState: typeInitialState = {
   isError: false,
 };
 
-export const selectVersionGptSlice = createSlice({
-  name: 'selectVersionGptSlice',
+export const globalVersionGptSlice = createSlice({
+  name: 'globalVersionGptSlice',
   initialState,
   reducers: {
     setSelectVersionGptSuccess: (state, action: PayloadAction<string>) => {
@@ -30,6 +30,6 @@ export const selectVersionGptSlice = createSlice({
   },
 });
 
-export default selectVersionGptSlice.reducer;
+export default globalVersionGptSlice.reducer;
 
-export const { setSelectVersionGptSuccess, setSelectVersionGptError, getAllVersionGpt } = selectVersionGptSlice.actions;
+export const { setSelectVersionGptSuccess, setSelectVersionGptError, getAllVersionGpt } = globalVersionGptSlice.actions;

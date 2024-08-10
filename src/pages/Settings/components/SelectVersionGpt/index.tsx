@@ -1,34 +1,23 @@
 import { Box, Radio, rem, Skeleton } from '@mantine/core';
-import { useEffect } from 'react';
 
-import { postSetVersionGpt } from '@src/features/Settings/api/postSetVersionGpt';
+import { useAppDispatch, useAppSelector } from '@src/shared/hooks/useRedux';
 
 import classes from './styles.module.css';
-import { useAppDispatch, useAppSelector } from '@src/shared/hooks/useRedux';
-import {
-  getAllVersionGptAction,
-  getSelectCurrentVerGptAction,
-} from '@src/features/Settings/model/servsionGptState/actions/versionGptAction';
+import { postSelectVerGptAction } from '@src/features/Settings/model/vervsionGptState/actions/versionGptAction';
 
 const PRIMARY_COL_HEIGHT = rem('95vh');
 
 export const SelectVersionGpt = () => {
   const dispatch = useAppDispatch();
-
   const { selectVersionGptCurent, allVersionGpt } = useAppSelector(
-    ({ selectVersionGpt }) => selectVersionGpt,
+    ({ globalVersionGptSlice }) => globalVersionGptSlice,
   );
 
   const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - var(--mantine-spacing-md) / 2)`;
 
   const handleRadioChange = (newValue: string) => {
-    postSetVersionGpt(newValue);
+    dispatch(postSelectVerGptAction(newValue));
   };
-
-  useEffect(() => {
-    dispatch(getSelectCurrentVerGptAction());
-    dispatch(getAllVersionGptAction());
-  }, [dispatch]);
 
   if (!allVersionGpt)
     return <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate />;

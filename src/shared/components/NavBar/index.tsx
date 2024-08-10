@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { Tooltip, UnstyledButton, Stack, rem } from '@mantine/core';
+import { Stack } from '@mantine/core';
 
 import { clearAllChat } from '@src/features/Chat/api/clearAllChat';
 import {
@@ -11,36 +11,11 @@ import {
   IconSwitchHorizontal,
   IconClearFormatting,
 } from '@tabler/icons-react';
+import { NavbarLink } from '@src/shared/components/NavbarLink';
 
 import classes from './NavbarMinimal.module.css';
 
-interface TypeNavbarLinkProps {
-  icon: typeof IconMessage2;
-  label: string;
-  active?: boolean;
-  onClick?(): void;
-}
-
-const NavbarLink = ({
-  icon: Icon,
-  label,
-  active,
-  onClick,
-}: TypeNavbarLinkProps) => {
-  return (
-    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
-      <UnstyledButton
-        onClick={onClick}
-        className={classes.link}
-        data-active={active || undefined}
-      >
-        <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
-      </UnstyledButton>
-    </Tooltip>
-  );
-};
-
-const mockdata = [
+const navBarLinks = [
   { icon: IconMessage2, label: 'Чат', uri: '/' },
   { icon: IconSettings, label: 'Настройки', uri: '/settings' },
 ];
@@ -62,12 +37,13 @@ export const NavbarPanel = () => {
     }
   };
 
-  const links = mockdata.map((link, index) => (
+  const links = navBarLinks.map((link, index) => (
     <NavbarLink
       {...link}
       key={link.label}
       active={index === active}
       onClick={() => handleClickNav(link.uri, index)}
+      className={classes.link}
     />
   ));
 
@@ -84,9 +60,14 @@ export const NavbarPanel = () => {
           icon={IconClearFormatting}
           label="Clerar chat"
           onClick={handleClearChat}
+          className={classes.link}
         />
-        <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
-        <NavbarLink icon={IconLogout} label="Logout" />
+        <NavbarLink
+          icon={IconSwitchHorizontal}
+          label="Change account"
+          className={classes.link}
+        />
+        <NavbarLink icon={IconLogout} label="Logout" className={classes.link} />
       </Stack>
     </nav>
   );
