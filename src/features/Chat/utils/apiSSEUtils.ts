@@ -17,6 +17,25 @@ export const requestMessageFromGPT = async (message: string): Promise<ReadableSt
   
     return body.getReader();
   };
+
+
+  export const requestMessageFromLlama = async (message: string): Promise<ReadableStreamDefaultReader<Uint8Array>>  => {
+
+    const { body } = await fetch(`${API_URl}/api/message-by-llama`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    });
+  
+    if (!body) {
+      throw new Error('ReadableStream not supported!');
+    }
+  
+    return body.getReader();
+ 
+  }
   
 export const updateChatWithStreamData = (
     chunk: Uint8Array,
@@ -58,3 +77,6 @@ export const updateChatWithStreamData = (
   
     return buffer;
   };
+
+
+

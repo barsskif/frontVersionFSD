@@ -5,6 +5,7 @@ import { CustomMarkdown } from '@src/shared/components/CustomMarkdown';
 import { getPrompt } from '@src/features/Settings/api/getPrompt';
 
 import styles from './StylePrompt.module.css';
+import { setNewPrompt } from '@src/features/Settings/api/setPrompt';
 
 const PRIMARY_COL_HEIGHT = rem('95vh');
 
@@ -44,6 +45,7 @@ export const Prompt = () => {
 
   const handleSavePrompt = async () => {
     setIsEdit(false);
+    setNewPrompt(prompt);
   };
 
   const isContentChanged = prompt.trim() !== initialPromptRef.current.trim();

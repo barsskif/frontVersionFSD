@@ -1,15 +1,24 @@
-import { requestMessageFromGPT, updateChatWithStreamData } from "@src/features/Chat/utils/apiSSEUtils";
+import { requestMessageFromGPT, requestMessageFromLlama, updateChatWithStreamData } from "@src/features/Chat/utils/apiSSEUtils";
 import type { messageType } from "@src/shared/@types/mesages";
 import type { SetStateAction } from "react";
 
-type TypePostMessageGPT = { message: string };
+type TypePostMessageGPT = { message: string, typeLLM: "gpt" | "llama" };
 
 export const fetchPostSSE = async (
   message: TypePostMessageGPT['message'],
-  setChatValue: (value: SetStateAction<[] | messageType[]>) => void
+  setChatValue: (value: SetStateAction<[] | messageType[]>) => void,
+  typeLLM: TypePostMessageGPT['typeLLM'] = "gpt",
 ): Promise<void> => {
   try {
-    const reader = await requestMessageFromGPT(message);
+    let reader: ReadableStreamDefaultReader<Uint8Array>;
+
+    if (typeLLM === "llama") {
+      reader = await requestMessageFromLlama(message);
+      console.log("🚀 ~ reader:", reader)
+    } else {
+      reader = await requestMessageFromGPT(message);
+    }
+    
     let buffer = '';
 
     const read = async (): Promise<void> => {

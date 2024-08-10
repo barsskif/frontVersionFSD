@@ -11,6 +11,7 @@ import { messageType } from '@src/shared/@types/mesages';
 import { InputQuestions } from '@src/pages/Chat/components/InputQuestions';
 
 import styles from './styles.module.css';
+import { getLLM } from '@src/shared/utils/getLLM';
 
 export const Chat = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,8 @@ export const Chat = () => {
   const { selectVersionGptCurent } = useAppSelector(
     ({ globalVersionGptSlice }) => globalVersionGptSlice,
   );
+
+  console.log('selectVersionGptCurent', selectVersionGptCurent);
 
   useEffect(() => {
     const fetch = async () => {
@@ -47,7 +50,7 @@ export const Chat = () => {
   ) => {
     event.preventDefault();
     if (inputQuestion.trim()) {
-      fetchPostSSE(inputQuestion, setMesages);
+      fetchPostSSE(inputQuestion, setMesages, getLLM(selectVersionGptCurent));
       setMesages((prevMessages) => [
         ...prevMessages,
         {
