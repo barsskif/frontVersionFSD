@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type typeInitialState = {
-  selectVersionGptCurent: string | null;
-  allVersionGpt: string[] | [];
-  isLoading: boolean;
-  isError: boolean;
+    selectVersionGptCurrent: string | null;
+    allVersionGpt: string[] | [];
+    isLoading: boolean;
+    isError: boolean;
 };
 
 const initialState: typeInitialState = {
-  selectVersionGptCurent: null,
-  allVersionGpt: [],
-  isLoading: false,
-  isError: false,
+    selectVersionGptCurrent: null,
+    allVersionGpt: [],
+    isLoading: false,
+    isError: false,
 };
 
 export const globalVersionGptSlice = createSlice({
@@ -22,7 +22,7 @@ export const globalVersionGptSlice = createSlice({
       state.isLoading = action.payload;
     },
     setSelectVersionGptSuccess: (state, action: PayloadAction<string>) => {
-      state.selectVersionGptCurent = action.payload;
+      state.selectVersionGptCurrent = action.payload;
     },
     setSelectVersionGptError: (state, action) => {
         state.isError = action.payload;

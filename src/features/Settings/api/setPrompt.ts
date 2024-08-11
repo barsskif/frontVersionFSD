@@ -1,8 +1,8 @@
 import axiosInstance from '@src/app/setings/axiosConfig';
 
-export const setNewPrompt = async (newPromt: string) => {
+export const setNewPrompt = async (newPrompt: string) => {
   const { data } = await axiosInstance.post(`/api/set-prompt`, {
-    prompt: newPromt
+    prompt: newPrompt
   });
 
   return data;

@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { Chat } from '@pages/Chat';
 import { MainLayout } from '@src/shared/hocs/MainLoaut';
-import { Setiings } from '@src/pages/Settings';
+import { Setings } from '@src/pages/Settings';
 
 const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/settings',
-    element: <MainLayout component={<Setiings />} />,
+    element: <MainLayout component={<Setings />} />,
   },
 ]);
 

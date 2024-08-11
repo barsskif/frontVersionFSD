@@ -9,14 +9,14 @@ const PRIMARY_COL_HEIGHT = rem('95vh');
 
 export const SelectVersionGpt = () => {
   const dispatch = useAppDispatch();
-  const { selectVersionGptCurent, allVersionGpt } = useAppSelector(
-    ({ globalVersionGptSlice }) => globalVersionGptSlice,
+  const { selectVersionGptCurrent, allVersionGpt } = useAppSelector(
+    state => state.globalVersionGptSlice
   );
 
   const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - var(--mantine-spacing-md) / 2)`;
 
-  const handleRadioChange = (newValue: string) => {
-    dispatch(postSelectVerGptAction(newValue));
+  const handleRadioChange = async (newValue: string) => {
+    await  dispatch(postSelectVerGptAction(newValue));
   };
 
   if (!allVersionGpt)
@@ -25,7 +25,7 @@ export const SelectVersionGpt = () => {
   return (
     <Box className={classes.switchRootWrapper}>
       <Radio.Group
-        value={selectVersionGptCurent}
+        value={selectVersionGptCurrent}
         onChange={handleRadioChange}
         name="gpt modal"
         label={

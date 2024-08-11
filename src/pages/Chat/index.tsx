@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Text } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from '@src/shared/hooks/useRedux';
 
@@ -15,12 +15,12 @@ import { getLLM } from '@src/shared/utils/getLLM';
 
 export const Chat = () => {
   const dispatch = useAppDispatch();
-  const [mesages, setMesages] = useState<[] | messageType[]>([]);
+  const [messages, setMessages] = useState<[] | messageType[]>([]);
   const [inputQuestion, setInputQuestion] = useState<string>('');
-  const [isLoading, setisLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { selectVersionGptCurent } = useAppSelector(
-    ({ globalVersionGptSlice }) => globalVersionGptSlice,
+  const { selectVersionGptCurrent } = useAppSelector(
+    state => state.globalVersionGptSlice,
   );
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export const Chat = () => {
       const data = await fetchMessage();
 
       if (data.message.length === 0) {
-        setMesages([
+        setMessages([
           {
             id: 0,
             text: 'Меня зовут Пятница! \n Чем я могу помочь?',
@@ -38,24 +38,24 @@ export const Chat = () => {
         ]);
       }
 
-      setMesages((prev) => [...prev, ...data.message]);
+      setMessages((prev) => [...prev, ...data.message]);
     };
 
-    fetch();
+    fetch().then();
   }, [dispatch]);
 
-  const handleSubmit = (
+  const handleSubmit = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent> | KeyboardEvent,
   ) => {
     event.preventDefault();
     if (inputQuestion.trim()) {
-      fetchPostSSE(
-        inputQuestion,
-        setMesages,
-        getLLM(selectVersionGptCurent),
-        setisLoading,
+     await fetchPostSSE(
+          inputQuestion,
+          setMessages,
+          getLLM(selectVersionGptCurrent),
+          setIsLoading,
       );
-      setMesages((prevMessages) => [
+      setMessages((prevMessages) => [
         ...prevMessages,
         {
           user: 'user',
@@ -71,11 +71,11 @@ export const Chat = () => {
   return (
     <Box className={styles.wrapperChatRoot}>
       <Text component="h1" className="">
-        assistent version:{' '}
-        <Text component="span">[{selectVersionGptCurent}]</Text>
+        assistant version:{' '}
+        <Text component="span">[{selectVersionGptCurrent}]</Text>
       </Text>
       <Box className={styles.wrapperMessageBlock}>
-        {mesages?.map((item) => (
+        {messages?.map((item) => (
           <MessageItem messageObj={item} key={item.id} />
         ))}
       </Box>

@@ -4,7 +4,7 @@ import { PromptComponent } from '@src/pages/Settings/components/PromptComponent'
 import { SelectVersionGpt } from '@src/pages/Settings/components/SelectVersionGpt';
 import { Stub } from '@src/shared/components/Stub';
 
-export const Setiings = () => {
+export const Setings = () => {
   return (
     <Container
       my="md"
