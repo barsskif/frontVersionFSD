@@ -1,9 +1,11 @@
+import { useEffect, useRef } from 'react';
+
 import { ActionIcon, rem, Textarea, useMantineTheme } from '@mantine/core';
 import { IconArrowRight } from '@tabler/icons-react';
 
-import { type InputQuestionsProps } from '@src/pages/Chat/components/InputQuestions/@types';
 import { CustomLoading } from '@src/shared/components/CustomLoading';
-import { useEffect, useRef } from 'react';
+
+import type { InputQuestionsProps } from '@src/pages/Chat/components/InputQuestions/@types';
 
 export const InputQuestions = (props: InputQuestionsProps) => {
   const theme = useMantineTheme();
@@ -15,14 +17,19 @@ export const InputQuestions = (props: InputQuestionsProps) => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (!inputRef.current) return;
 
-      if (event.key === 'Enter' && !event.ctrlKey) {
+      if (event.key === 'Enter' && !event.ctrlKey && !event.shiftKey) {
         sendFn(event);
-      } else if (event.key === 'Enter' && event.ctrlKey) {
+      } else if (
+        (event.key === 'Enter' && event.ctrlKey) ||
+        (event.key === 'Enter' && event.shiftKey)
+      ) {
         const cursorPosition = inputRef.current.selectionStart;
+
         inputRef.current.value =
           inputRef.current.value.substring(0, cursorPosition) +
           '\n' +
           inputRef.current.value.substring(cursorPosition);
+
         inputRef.current.selectionStart = cursorPosition + 1;
         inputRef.current.selectionEnd = cursorPosition + 1;
       }

@@ -1,19 +1,19 @@
+import { useEffect, useRef } from 'react';
 import { Box, Text } from '@mantine/core';
 import { clsx } from 'clsx';
 
+import { getRole } from '@src/shared/utils/getRole';
 import { CustomMarkdown } from '@src/shared/components/CustomMarkdown';
 import { CardMessageWrapper } from '@src/shared/components/CardMessageWrapper';
 
 import styles from './styles.module.css';
-
 import { messageItemPropsType } from './@types';
-import { useEffect, useRef } from 'react';
 
 export const MessageItem = ({ messageObj }: messageItemPropsType) => {
   const { text: message, user: sender, time } = messageObj;
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
-  const isUser = sender === 'user';
+  const isUser = getRole(sender);
 
   useEffect(() => {
     const scrollToBottom = () => {
