@@ -6,8 +6,8 @@ import { getRole } from '@src/shared/utils/getRole';
 import { CustomMarkdown } from '@src/shared/components/CustomMarkdown';
 import { CardMessageWrapper } from '@src/shared/components/CardMessageWrapper';
 
-import styles from './styles.module.css';
 import { messageItemPropsType } from './@types';
+import styles from './styles.module.css';
 
 export const MessageItem = ({ messageObj }: messageItemPropsType) => {
   const { text: message, user: sender, time } = messageObj;

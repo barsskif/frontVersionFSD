@@ -17,19 +17,10 @@ export const InputQuestions = (props: InputQuestionsProps) => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (!inputRef.current) return;
 
-      if (event.key === 'Enter' && !event.ctrlKey && !event.shiftKey) {
+      if (event.key === 'Enter' && !event.shiftKey) {
         sendFn(event);
-      } else if (
-        (event.key === 'Enter' && event.ctrlKey) ||
-        (event.key === 'Enter' && event.shiftKey)
-      ) {
-        const cursorPosition = inputRef.current.selectionStart;
-        inputRef.current.value =
-          inputRef.current.value.substring(0, cursorPosition) +
-          '\n' +
-          inputRef.current.value.substring(cursorPosition);
-        inputRef.current.selectionStart = cursorPosition + 1;
-        inputRef.current.selectionEnd = cursorPosition + 1;
+      } else if (event.key === 'Enter' && event.shiftKey) {
+        return;
       }
     };
 

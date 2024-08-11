@@ -41,7 +41,7 @@ export const Chat = () => {
       setMessages((prev) => [...prev, ...data.message]);
     };
 
-    fetch().then();
+    fetch();
   }, [dispatch]);
 
   const handleSubmit = async (
@@ -49,12 +49,6 @@ export const Chat = () => {
   ) => {
     event.preventDefault();
     if (inputQuestion.trim()) {
-      await fetchPostSSE(
-        inputQuestion,
-        setMessages,
-        getLLM(selectVersionGptCurrent),
-        setIsLoading,
-      );
       setMessages((prevMessages) => [
         ...prevMessages,
         {
@@ -65,6 +59,13 @@ export const Chat = () => {
         },
       ]);
       setInputQuestion('');
+
+      await fetchPostSSE(
+        inputQuestion,
+        setMessages,
+        getLLM(selectVersionGptCurrent),
+        setIsLoading,
+      );
     }
   };
 
