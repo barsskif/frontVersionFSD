@@ -11,18 +11,15 @@ import { getCurrentTime } from '@src/shared/utils/getTimeMessage';
 import { AssistantAvatar, UserAvatar } from '@src/shared/enum';
 
 import classes from './CardMessageWrapper.module.css';
+import { ICardMessageWrapperProps } from './@types';
 
 export const CardMessageWrapper = ({
   children,
   sender,
   date,
-}: {
-  children: React.ReactNode;
-  sender: string;
-  date: string;
-}) => {
-  const role = getRole(sender);
-  const urlAvatar = role ? UserAvatar : AssistantAvatar;
+}: ICardMessageWrapperProps) => {
+  const isUser = getRole(sender);
+  const urlAvatar = isUser ? UserAvatar : AssistantAvatar;
 
   return (
     <Paper
@@ -31,8 +28,8 @@ export const CardMessageWrapper = ({
       className={classes.comment}
       styles={() => ({
         root: {
-          background: role ? '#181616a8' : 'inherit',
-          color: role ? '#fefefecc' : 'inherit',
+          background: isUser ? '#181616a8' : 'inherit',
+          color: isUser ? '#fefefecc' : 'inherit',
         },
       })}
     >
