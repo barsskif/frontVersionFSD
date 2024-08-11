@@ -4,5 +4,3 @@ export const getVersionAssistent =  async () => {
     const { data } = await axiosInstance.get(`/api/get-version-gpt`)
     return data
 }
- 
-   
