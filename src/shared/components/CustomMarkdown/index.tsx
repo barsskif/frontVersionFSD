@@ -6,7 +6,8 @@ import Prism from 'prismjs';
 
 import { CustomHeading } from '@src/shared/components/CustomHeading';
 
-import 'prism-themes/themes/prism-darcula.css';
+// import 'prism-themes/themes/prism-darcula.css';
+import 'prism-themes/themes/prism-hopscotch.css';
 import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-typescript';
