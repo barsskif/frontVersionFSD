@@ -17,12 +17,11 @@ export const Chat = () => {
   const dispatch = useAppDispatch();
   const [mesages, setMesages] = useState<[] | messageType[]>([]);
   const [inputQuestion, setInputQuestion] = useState<string>('');
+  const [isLoading, setisLoading] = useState<boolean>(false);
 
   const { selectVersionGptCurent } = useAppSelector(
     ({ globalVersionGptSlice }) => globalVersionGptSlice,
   );
-
-  console.log('selectVersionGptCurent', selectVersionGptCurent);
 
   useEffect(() => {
     const fetch = async () => {
@@ -46,11 +45,16 @@ export const Chat = () => {
   }, [dispatch]);
 
   const handleSubmit = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | KeyboardEvent,
   ) => {
     event.preventDefault();
     if (inputQuestion.trim()) {
-      fetchPostSSE(inputQuestion, setMesages, getLLM(selectVersionGptCurent));
+      fetchPostSSE(
+        inputQuestion,
+        setMesages,
+        getLLM(selectVersionGptCurent),
+        setisLoading,
+      );
       setMesages((prevMessages) => [
         ...prevMessages,
         {
@@ -82,6 +86,7 @@ export const Chat = () => {
           className={styles.wrapperInputBlock}
           inputquestion={inputQuestion}
           sendFn={handleSubmit}
+          loading={isLoading}
         />
       </Box>
     </Box>

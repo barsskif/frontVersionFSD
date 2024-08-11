@@ -1,6 +1,8 @@
+import type { SetStateAction } from "react";
+
 import { requestMessageFromGPT, updateChatWithStreamData } from "@src/features/Chat/utils/apiSSEUtils";
 import type { messageType } from "@src/shared/@types/mesages";
-import type { SetStateAction } from "react";
+
 
 type TypePostMessageGPT = { message: string, typeLLM: "gpt" | "llama" };
 
@@ -8,11 +10,11 @@ export const fetchPostSSE = async (
   message: TypePostMessageGPT['message'],
   setChatValue: (value: SetStateAction<[] | messageType[]>) => void,
   typeLLM: TypePostMessageGPT['typeLLM'] = "gpt",
+  setisLoading: React.Dispatch<React.SetStateAction<boolean>>
 ): Promise<void> => {
   const uri = typeLLM === "llama" ? '/api/message-by-llama' : '/api/message' ;
-  console.log("🚀 ~ uri:", uri)
   try {
-
+    setisLoading(true)
    const reader = await requestMessageFromGPT(message, uri);
 
     let buffer = '';
@@ -34,5 +36,7 @@ export const fetchPostSSE = async (
     await read();
   } catch (error) {
     console.error('Error:', error);
+  }finally {
+    setisLoading(false)
   }
 };
