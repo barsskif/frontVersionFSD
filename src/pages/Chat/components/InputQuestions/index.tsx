@@ -24,12 +24,10 @@ export const InputQuestions = (props: InputQuestionsProps) => {
         (event.key === 'Enter' && event.shiftKey)
       ) {
         const cursorPosition = inputRef.current.selectionStart;
-
         inputRef.current.value =
           inputRef.current.value.substring(0, cursorPosition) +
           '\n' +
           inputRef.current.value.substring(cursorPosition);
-
         inputRef.current.selectionStart = cursorPosition + 1;
         inputRef.current.selectionEnd = cursorPosition + 1;
       }
@@ -41,7 +39,6 @@ export const InputQuestions = (props: InputQuestionsProps) => {
 
     return () => {
       if (inputRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         inputRef.current.removeEventListener('keypress', handleKeyPress);
       }
     };
