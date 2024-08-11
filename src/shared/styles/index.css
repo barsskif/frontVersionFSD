@@ -46,6 +46,7 @@ body {
 }
 
 pre {
-  background-color: #2b2b2b !important;
+  /* background-color: #2b2b2b !important; */
+   background-color: #322931 !important;
   padding-top: 25px !important;
 }
