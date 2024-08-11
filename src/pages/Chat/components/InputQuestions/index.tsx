@@ -1,10 +1,7 @@
 import { useEffect, useRef } from 'react';
-
 import { ActionIcon, rem, Textarea, useMantineTheme } from '@mantine/core';
 import { IconArrowRight } from '@tabler/icons-react';
-
 import { CustomLoading } from '@src/shared/components/CustomLoading';
-
 import type { InputQuestionsProps } from '@src/pages/Chat/components/InputQuestions/@types';
 
 export const InputQuestions = (props: InputQuestionsProps) => {
@@ -16,7 +13,6 @@ export const InputQuestions = (props: InputQuestionsProps) => {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (!inputRef.current) return;
-
       if (event.key === 'Enter' && !event.shiftKey) {
         sendFn(event);
       } else if (event.key === 'Enter' && event.shiftKey) {
@@ -27,7 +23,6 @@ export const InputQuestions = (props: InputQuestionsProps) => {
     if (inputRef.current) {
       inputRef.current.addEventListener('keypress', handleKeyPress);
     }
-
     return () => {
       if (inputRef.current) {
         inputRef.current.removeEventListener('keypress', handleKeyPress);
@@ -35,7 +30,7 @@ export const InputQuestions = (props: InputQuestionsProps) => {
     };
   }, [sendFn]);
 
-  const rightSection = () => {
+  const renderRightSection = () => {
     if (inputquestion.length) {
       return (
         <ActionIcon
@@ -46,13 +41,16 @@ export const InputQuestions = (props: InputQuestionsProps) => {
           disabled={loading}
         >
           <IconArrowRight
-            style={{ width: rem(18), height: rem(18), rotate: '270deg' }}
+            style={{
+              width: rem(18),
+              height: rem(18),
+              rotate: '270deg',
+            }}
             stroke={1.5}
           />
         </ActionIcon>
       );
     }
-
     if (loading) {
       return <CustomLoading loading={loading} />;
     }
@@ -65,14 +63,14 @@ export const InputQuestions = (props: InputQuestionsProps) => {
       onChange={(event) => setinputquestion(event.target.value)}
       placeholder="questions"
       withAsterisk
-      styles={() => ({
+      styles={{
         input: {
           alignContent: 'center',
           height: '44px',
           width: '600px',
         },
-      })}
-      rightSection={rightSection()}
+      }}
+      rightSection={renderRightSection()}
       {...restProps}
     />
   );
