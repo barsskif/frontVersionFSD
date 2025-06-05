@@ -63,6 +63,7 @@ export const InputQuestions = (props: InputQuestionsProps) => {
       onChange={(event) => setinputquestion(event.target.value)}
       placeholder="questions"
       withAsterisk
+      autosize
       styles={{
         input: {
           alignContent: 'center',

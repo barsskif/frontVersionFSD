@@ -81,7 +81,7 @@ export const Chat = () => {
         ))}
       </Box>
 
-      <Box>
+      <Box style={{ position: 'relative' }}>
         <InputQuestions
           setinputquestion={setInputQuestion}
           className={styles.wrapperInputBlock}
